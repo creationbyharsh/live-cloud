@@ -1,5 +1,4 @@
-from flask import render_template
-from flask import Flask, request
+from flask import Flask, request, render_template
 import os, subprocess
 
 app = Flask(__name__)
@@ -9,8 +8,11 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 process = None
 
+@app.route("/")
+def home():
+    return render_template("index.html")
+
 @app.route("/upload", methods=["POST"])
-def @app.route("/upload", methods=["POST"])
 def upload():
     if "file" not in request.files:
         return "NO FILE", 400
@@ -19,16 +21,12 @@ def upload():
     path = os.path.join(app.config["UPLOAD_FOLDER"], "video.mp4")
     f.save(path)
     return "UPLOADED"
-    
-@app.route("/")
-def home():
-    return render_template("index.html")
 
 @app.route("/start")
 def start():
     global process
     key = request.args.get("key")
-    video = os.path.join(UPLOAD_FOLDER, "video.mp4")
+    video = os.path.join(app.config["UPLOAD_FOLDER"], "video.mp4")
     cmd = [
         "ffmpeg","-re","-stream_loop","-1","-i",video,
         "-c:v","copy","-c:a","aac","-f","flv",
