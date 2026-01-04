@@ -14,6 +14,10 @@ def upload():
     path = os.path.join(UPLOAD_FOLDER, "video.mp4")
     f.save(path)
     return "UPLOADED"
+    
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 @app.route("/start")
 def start():
