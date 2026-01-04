@@ -1,0 +1,31 @@
+<h2>YouTube Live Controller</h2>
+
+<input id="key" placeholder="Enter Stream Key">
+<br><br>
+
+<input type="file" id="video">
+<br><br>
+
+<button onclick="upload()">Upload Video</button>
+<button onclick="start()">Start Live</button>
+<button onclick="stop()">Stop Live</button>
+
+<script>
+const SERVER = "";
+
+function upload(){
+  let f = document.getElementById("video").files[0];
+  let data = new FormData();
+  data.append("file", f);
+  fetch("/upload", {method:"POST", body:data});
+}
+
+function start(){
+ let k = document.getElementById("key").value;
+ fetch("/start?key="+k);
+}
+
+function stop(){
+ fetch("/stop");
+}
+</script>
