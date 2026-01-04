@@ -5,13 +5,18 @@ import os, subprocess
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 process = None
 
 @app.route("/upload", methods=["POST"])
+def @app.route("/upload", methods=["POST"])
 def upload():
+    if "file" not in request.files:
+        return "NO FILE", 400
+
     f = request.files["file"]
-    path = os.path.join(UPLOAD_FOLDER, "video.mp4")
+    path = os.path.join(app.config["UPLOAD_FOLDER"], "video.mp4")
     f.save(path)
     return "UPLOADED"
     
