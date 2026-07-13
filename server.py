@@ -27,7 +27,7 @@ def start():
     global process
     key = request.args.get("key")
     video = os.path.join(app.config["UPLOAD_FOLDER"], "video.mp4")
-    cmd = f"ffmpeg -re -stream_loop -1 -i {video} -c:v copy -c:a aac -f flv rtmp://a.rtmp.youtube.com/live2/{key}"
+    cmd = f"ffmpeg -re -stream_loop -1 -i {video} -c:v copy -c:a aac -f flv rtmp://a.rtmp.youtube.com/live2/{uvwf-e6xb-0fur-dpgz-dsg8}"
     os.system(cmd + " || " + cmd)
     return "LIVE STARTED"
 
